@@ -1,0 +1,7 @@
+id: sparkplug-example
+type: sparkplug-b
+name: localhost
+description: Local Mosquitto MQTT Broker
+parameters:
+  server: localhost
+  port: 1883

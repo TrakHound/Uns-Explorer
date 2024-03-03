@@ -1,0 +1,7 @@
+id: mqtt-example
+type: mqtt
+name: localhost
+description: Local Mosquitto MQTT Broker
+parameters:
+  server: localhost
+  port: 1883

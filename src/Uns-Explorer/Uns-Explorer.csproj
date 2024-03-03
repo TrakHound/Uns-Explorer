@@ -10,11 +10,17 @@
 
   <ItemGroup>
     <PackageReference Include="Radzen.Blazor" Version="4.25.9" />
+    <PackageReference Include="Uns.NET" Version="0.2.1-beta" />
     <PackageReference Include="YamlDotNet" Version="15.1.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Uns.NET\src\Uns.NET\Uns.NET.csproj" />
+    <None Update="connections\mqtt-example\config.yaml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="connections\sparkplug-example\config.yaml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

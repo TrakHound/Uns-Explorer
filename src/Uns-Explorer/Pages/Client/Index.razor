@@ -1,4 +1,5 @@
-﻿@page "/client/{connectionId}"
+﻿@page "/"
+@page "/client/{connectionId}"
 @rendermode InteractiveServer
 @inject ClientService clientService
 
@@ -38,6 +39,8 @@
 
     protected async override Task OnInitializedAsync()
     {
+        if (ConnectionId == null) ConnectionId = "mqtt-example"; // DEBUG ONLY
+
         await Load();
     }
 
