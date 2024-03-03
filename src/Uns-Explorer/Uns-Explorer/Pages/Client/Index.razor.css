@@ -1,0 +1,39 @@
+﻿.client-page {
+    display: grid;
+    grid-template-rows: max-content 1fr max-content;
+    height: 100%;
+    overflow: hidden;
+}
+
+.client-toolbar {
+    grid-row: 1;
+}
+
+.client-content {
+    grid-row: 2;
+    height: 100%;
+    overflow: hidden;
+}
+
+.client-tree {
+    height: 100%;
+    overflow: hidden;
+}
+
+.client-sidebar {
+    height: 100%;
+    overflow: auto;
+    background: var(--accentVeryDark);
+    background: linear-gradient(90deg, var(--accentDark) 0%, #1b5998 100%);
+    background: #040d16;
+    background: #0a0d0f;
+    background: #0b2641;
+    background: #0f263d;
+    background: #071a2c;
+    background: #0a1a29;
+    background: #0d1a26;
+}
+
+.client-footer {
+    grid-row: 3;
+}

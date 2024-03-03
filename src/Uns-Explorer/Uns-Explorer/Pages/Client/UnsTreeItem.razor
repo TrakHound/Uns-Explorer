@@ -1,0 +1,131 @@
+﻿@implements IDisposable
+@rendermode InteractiveServer
+@inject ClientService clientService
+
+@{
+    var childPaths = clientService.GetChildPaths(Path);
+
+    var childCount = 1;
+    var hasChildren = false;
+
+    if (childPaths != null) 
+    {
+        var childPathCount = childPaths.Count();
+        hasChildren = childPathCount > 0;
+        childCount += childPathCount;
+    }
+
+    var messageCount = $"({childCount} path, {_messageCount} messages)";
+    var expandedClass = _expanded ? "expanded" : "collapsed";
+    var hasChildrenClass = hasChildren ? "has-children" : "no-children";
+    var recentClass = _recent ? "recent" : "";
+
+    var treeNodeClass = hasChildren ? $"rz-treenode has-children {recentClass}" : $"rz-treenode no-children {recentClass}";
+}
+
+<RadzenTreeItem Text="@Path" HasChildren="@hasChildren" class="@treeNodeClass">
+    <Template>
+        <div class="uns-tree-item-content @expandedClass">
+            <span class="path">@Path</span>
+
+            @if (hasChildren && !_expanded)
+            {
+                <span class="count">@messageCount</span>
+            }
+
+            @if (_value != null)
+            {
+                <span class="symbol">=</span>
+                <span class="value">@_value</span>
+            }
+
+        </div>
+    </Template>
+    <ChildContent>
+
+        @if (hasChildren)
+        {
+            foreach (var childPath in childPaths)
+            {
+                <UnsTreeItem Path="@childPath" />
+            }
+        }
+
+    </ChildContent>
+</RadzenTreeItem>
+
+@code {
+
+    private DelayEvent _recentDelay = new DelayEvent(1500);
+    private string _value;
+    private long _messageCount;
+    private bool _expanded;
+    private bool _recent;
+
+
+    [Parameter]
+    public string Path { get; set; }
+
+
+    protected override void OnInitialized()
+    {
+        _recentDelay.Elapsed += RecentDelayElapsed;
+
+        _value = clientService.GetValue(Path);
+        _messageCount = clientService.GetMessageCount(Path);
+        _expanded = clientService.GetExpanded(Path);
+
+        clientService.ValueUpdated += ClientValueUpdated;
+        clientService.MessageCountUpdated += ClientMessageCountUpdated;
+        clientService.ExpandedChanged += ClientExpandedChanged;
+    }
+
+    void IDisposable.Dispose()
+    {
+        clientService.ValueUpdated -= ClientValueUpdated;
+        clientService.MessageCountUpdated -= ClientMessageCountUpdated;
+        clientService.ExpandedChanged -= ClientExpandedChanged;
+    }
+
+    private async void ClientValueUpdated(string path, string value)
+    {
+        if (path == Path)
+        {
+            _value = value;
+            _recent = true;
+            _recentDelay.Set();
+            await InvokeAsync(StateHasChanged);
+        }
+        else if (UnsPath.IsChildOf(Path, path))
+        {
+            _recent = true;
+            _recentDelay.Set();
+            await InvokeAsync(StateHasChanged);
+        }
+    }
+
+    private async void ClientMessageCountUpdated(string path, long count)
+    {
+        if (path == Path)
+        {
+            _messageCount++;
+            await InvokeAsync(StateHasChanged);
+        }
+    }
+
+    private async void ClientExpandedChanged(string path, bool expanded)
+    {
+        if (path == Path)
+        {
+            _expanded = expanded;
+            await InvokeAsync(StateHasChanged);
+        }
+    }
+
+    private async void RecentDelayElapsed(object sender, EventArgs args)
+    {
+        _recent = false;
+        await InvokeAsync(StateHasChanged);
+    }
+
+}

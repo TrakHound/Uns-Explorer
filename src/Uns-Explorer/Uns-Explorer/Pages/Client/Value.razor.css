@@ -1,0 +1,105 @@
+﻿.event-value-panel {
+    display: grid;
+    grid-template-rows: max-content max-content max-content 1fr;
+    grid-template-columns: max-content 1fr;
+}
+
+.title-panel {
+    grid-row: 1;
+    grid-column: 1;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 5px 20px;
+    color: #d3e6f8;
+}
+
+.toolbar-panel {
+    grid-row: 1;
+    grid-column: 2;
+}
+
+    .toolbar-panel .btn-toolbar {
+        display: inline-block;
+        height: 40px;
+        border: none;
+        border-radius: 0;
+        transition: none;
+    }
+
+        .toolbar-panel .btn-toolbar:hover {
+            background: var(--accent);
+        }
+
+        .toolbar-panel .btn-toolbar .icon {
+            color: var(--accentVeryLight);
+        }
+
+.options-panel {
+    grid-row: 2;
+    grid-column: 1;
+    padding: 5px 20px;
+}
+
+    .options-panel .btn-option {
+        display: inline-block;
+        height: 40px;
+        width: 50px;
+        background: var(--accentVeryDark);
+        border: 1px solid var(--accentDark);
+        border-radius: 3px;
+        transition: none;
+    }
+
+        .options-panel .btn-option:hover {
+            background: var(--accent);
+        }
+
+        .options-panel .btn-option .icon {
+            color: var(--accentVeryLight);
+        }
+
+        .information-panel {
+            grid-row: 2;
+            grid-column: 2;
+            text-align: right;
+            padding: 0 20px;
+        }
+
+        .information-panel .quality {
+            display: block;
+            color: #eee;       
+            font-size: 14px;
+        }
+
+            .information-panel .timestamp {
+                display: block;
+                color: #eee;
+                font-size: 14px;
+            }
+
+.content-type-panel {
+    grid-row: 3;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    padding: 5px 20px;
+}
+
+.content-panel {
+    grid-row: 4;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    padding: 5px 15px 10px;
+    border-bottom: 1px solid var(--accentDark);
+}
+
+    .content-panel .content {
+        max-height: 500px;
+        overflow: auto;
+        color: #eee;
+        background: #081a2b;
+        background: #0c2741;
+        background: #103456;
+        padding: 20px 15px;
+        white-space: pre;
+        font-size: 12px;
+    }

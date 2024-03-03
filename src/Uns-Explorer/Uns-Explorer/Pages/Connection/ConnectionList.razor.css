@@ -1,0 +1,44 @@
+﻿.connection-list {
+    background: var(--accentVeryDark);
+    background: #0d1a26;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.connection-list-item {
+    background: red;
+    padding: 20px;
+    min-width: 300px;
+    background: var(--accentDark);
+    background: linear-gradient(0deg, #eee 0%, #fafafa 100%);
+    color: #333;
+    border: 1px solid var(--accentVeryLight);
+    border-radius: 4px;
+    margin: 5px 5px 0;
+}
+
+    .connection-list-item:hover {
+        background: linear-gradient(0deg, #ddd 0%, #eee 100%);
+        color: var(--accent);
+    }
+
+.connection-list-item.active {
+    background: var(--accentLight);
+    color: var(--accentVeryDark);
+}
+
+.connection-list-item-header {
+
+}
+
+.connection-type {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.connection-list-item-information {
+}
+
+.connection-title {
+    font-size: 16px;
+}

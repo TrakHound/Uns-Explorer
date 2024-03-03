@@ -1,0 +1,63 @@
+﻿@implements IDisposable
+@rendermode InteractiveServer
+@inject ClientService clientService
+
+<div class="uns-tree-view">
+
+    @if (clientService != null)
+    {
+        var paths = clientService.GetFilteredPaths(clientService.SubscribePath);
+        if (paths != null && paths.Count() > 0)
+        {
+            <RadzenTree Change="TreeItemSelected" Expand="TreeItemExpanded" Collapse="TreeItemCollapsed">
+                <UnsServerTreeItem>
+
+                    @foreach (var path in paths)
+                    {
+                        <UnsTreeItem Path="@path" />
+                    }
+
+                </UnsServerTreeItem>
+            </RadzenTree>
+        }
+    }
+
+</div>
+
+@code {
+
+    protected override void OnInitialized()
+    {
+        clientService.Updated += ClientUpdated;
+    }
+
+    void IDisposable.Dispose()
+    {
+        clientService.Updated -= ClientUpdated;
+    }
+
+    private async void ClientUpdated(object sender, EventArgs args)
+    {
+        try
+        {
+            await InvokeAsync(StateHasChanged);
+        }
+        catch { } // Getting called sometimes after Component is disposed. Probably need a better solution?
+    }
+
+    private void TreeItemSelected(TreeEventArgs args)
+    {
+        clientService.Select(args.Text);
+    }
+
+    private void TreeItemExpanded(TreeExpandEventArgs args)
+    {
+        clientService.SetExpanded(args.Text, true);
+    }
+
+    private void TreeItemCollapsed(TreeEventArgs args)
+    {
+        clientService.SetExpanded(args.Text, false);
+    }
+
+}

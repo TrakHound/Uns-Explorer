@@ -1,0 +1,46 @@
+﻿@rendermode InteractiveServer
+@inject ClientService clientService
+
+@if (clientService.SelectedPath != null)
+{
+    <div class="event-publish-panel">
+        <div class="title-panel">
+            <span class="title">Publish</span>
+        </div>
+        <div class="toolbar-panel">
+            <button class="btn btn-toolbar btn-publish" @onclick="PublishClicked"><span class="icon fa-solid fa-sharp fa-paper-plane"></span>Publish</button>
+        </div>
+        <div class="path-panel">
+            <RadzenTextBox @bind-Value="@path" />
+        </div>
+        <div class="input-panel">
+            <RadzenTextArea @bind-Value="@content" />
+        </div>
+    </div>    
+}
+
+@code {
+
+    private string path;
+    private string content;
+
+
+    protected override void OnInitialized()
+    {
+        clientService.PathSelected += PathSelected;
+    }
+
+    private async void PathSelected(object sender, string path)
+    {
+        await InvokeAsync(StateHasChanged);
+    }
+
+    private async void PublishClicked()
+    {
+        if (!string.IsNullOrEmpty(path))
+        {
+            await clientService.Publish(path, content);
+        }
+    }
+
+}

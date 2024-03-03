@@ -1,0 +1,40 @@
+﻿@inject ClientService clientService
+
+@if (clientService.SelectedPath != null)
+{
+    var pathParts = UnsPath.GetPaths(clientService.SelectedPath);
+
+    <div class="event-information-panel">
+        <div class="title-panel">
+            <span class="title">Path</span>
+        </div>    
+        <div class="toolbar-panel">
+            <button class="btn btn-toolbar"><span class="icon fa-solid fa-sharp fa-copy"></span></button>
+            <button class="btn btn-toolbar btn-delete"><span class="icon fa-solid fa-sharp fa-trash"></span></button>
+        </div>
+        <div class="path-panel">
+            <BreadcrumbLinks>
+
+                @foreach (var pathPart in pathParts)
+                {
+                    <BreadcrumbLink Display="@UnsPath.GetObject(pathPart)"/>
+                }
+
+            </BreadcrumbLinks>
+        </div>
+    </div>    
+}
+
+@code {
+
+    protected override void OnInitialized()
+    {
+        clientService.PathSelected += PathSelected;
+    }
+
+    private async void PathSelected(object sender, string path)
+    {
+        await InvokeAsync(StateHasChanged);
+    }
+
+}

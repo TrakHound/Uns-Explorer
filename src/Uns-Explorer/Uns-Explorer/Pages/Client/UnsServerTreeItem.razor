@@ -1,0 +1,26 @@
+﻿@inject ClientService clientService
+
+@if (clientService.ConnectionConfiguration != null)
+{
+    var connectionType = clientService.ConnectionConfiguration.Type?.ToUpper();
+    var connectionTitle = clientService.ConnectionConfiguration.Display;
+
+    <RadzenTreeItem Text="@clientService.ConnectionConfiguration.Id">
+        <Template>
+            <div class="uns-tree-item-content">
+                <span class="connection-type">[@connectionType]</span>
+                <span class="connection-title">@connectionTitle</span>
+            </div>
+        </Template>
+        <ChildContent>
+            @ChildContent
+        </ChildContent>
+    </RadzenTreeItem>
+}
+
+@code {
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+}

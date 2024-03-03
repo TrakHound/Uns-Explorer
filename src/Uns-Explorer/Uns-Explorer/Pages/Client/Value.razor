@@ -1,0 +1,68 @@
+﻿@inject ClientService clientService
+@inject FormatService formatService
+
+@if (clientService.SelectedPath != null)
+{
+    var message = clientService.GetMessage(clientService.SelectedPath);
+
+    if (message != null)
+    {
+        <div class="event-value-panel">
+            <div class="title-panel">
+                <span class="title">Value</span>
+            </div>
+            <div class="toolbar-panel">
+                <button class="btn btn-toolbar"><span class="icon fa-solid fa-sharp fa-copy"></span></button>
+            </div>
+            <div class="options-panel">
+                <button class="btn btn-option"><span class="icon fa-solid fa-sharp fa-code"></span></button>
+                <button class="btn btn-option"><span class="icon fa-solid fa-sharp fa-bars"></span></button>
+            </div>
+            <div class="information-panel">
+                <span class="quality">QoS: 0</span>
+                <span class="timestamp">@message.Timestamp.ToString("o")</span>
+            </div>
+            <div class="content-type-panel">
+                <RadzenDropDown TValue="UnsEventContentType" Value="@selectedContentType" ValueChanged="ContentTypeSelected" Data="Enum.GetValues<UnsEventContentType>()" />
+            </div>
+            <div class="content-panel">
+                <pre class="content">@formatService.GetString(message, selectedContentType)</pre>
+            </div>
+        </div>   
+    } 
+}
+
+@code {
+
+    private UnsEventContentType? selectedContentType;
+
+
+    protected override void OnInitialized()
+    {
+        clientService.PathSelected += PathSelected;
+        clientService.ValueUpdated += ValueUpdated;
+    }
+
+    private async void PathSelected(object sender, string path)
+    {
+        selectedContentType = null;
+        await InvokeAsync(StateHasChanged);
+    }
+
+    private async void ValueUpdated(string path, string value)
+    {
+        if (path == clientService.SelectedPath)
+        {
+            await InvokeAsync(StateHasChanged);
+        }
+    }
+
+
+    private async void ContentTypeSelected(UnsEventContentType contentType)
+    {
+        selectedContentType = contentType;
+
+        await InvokeAsync(StateHasChanged);
+    }
+
+}

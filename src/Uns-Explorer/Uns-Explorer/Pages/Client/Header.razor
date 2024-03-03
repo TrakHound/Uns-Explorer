@@ -1,0 +1,51 @@
+﻿@implements IDisposable
+@rendermode InteractiveServer
+@inject ClientService clientService
+
+<div class="toolbar">
+    <div class="toolbar-menu">
+        <button class="btn btn-menu"><span class="icon fa-solid fa-sharp fa-bars"></span></button>
+    </div>
+    <div class="toolbar-logo">
+        <img class="logo logo-negative" src="img/uns-net-logo-01-negative.svg" />
+        <img class="logo logo-positive" src="img/uns-net-logo-01-positive.svg" />
+    </div>
+    <div class="toolbar-title">
+        <span class="title">UNS<span class="subtitle">Explorer</span></span>
+    </div>
+    <div class="toolbar-search">
+        <SearchBox Value="@searchPath" ValueChanged="SubscribePathChanged" />
+    </div>
+    <div class="toolbar-buttons">
+        <button class="btn btn-subscribe"><span class="icon fa-solid fa-sharp fa-circle-pause"></span></button>
+    </div>
+</div>
+
+@code {
+
+    private readonly DelayEvent _searchDelay = new DelayEvent(100);
+    private string searchPath;
+
+
+    protected override void OnInitialized()
+    {
+        _searchDelay.Elapsed += SearchDelayElapsed;
+    }
+
+    void IDisposable.Dispose()
+    {
+        _searchDelay.Elapsed -= SearchDelayElapsed;
+    }
+
+    private void SubscribePathChanged(string path)
+    {
+        searchPath = path;
+        _searchDelay.Set();
+    }
+
+    private void SearchDelayElapsed(object sender, EventArgs args)
+    {
+        clientService.Subscribe(searchPath);
+    }
+
+}

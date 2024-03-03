@@ -1,0 +1,53 @@
+﻿.event-information-panel {
+    display: grid;
+    grid-template-rows: max-content 1fr;
+    grid-template-columns: 1fr max-content;
+}
+
+.title-panel {
+    grid-row: 1;
+    grid-column: 1;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 5px 20px;
+    color: #d3e6f8;
+}
+
+.toolbar-panel {
+    grid-row: 1;
+    grid-column: 2;
+}
+
+.toolbar-panel .btn-toolbar {
+    display: inline-block;
+    height: 40px;
+    border: none;
+    border-radius: 0;
+    transition: none;
+}
+
+    .toolbar-panel .btn-toolbar:hover {
+        background: var(--accent);
+    }
+
+    .toolbar-panel .btn-toolbar .icon {
+        color: var(--accentVeryLight);
+    }
+
+.path-panel {
+    grid-row: 2;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    height: 100%;
+    padding: 25px 15px 15px;
+    overflow-y: auto;
+    border-bottom: 1px solid var(--accentDark);
+}
+
+    .path-panel ::deep .breadcrumb-organizer {
+        color: #fff;
+    }
+
+    .path-panel ::deep .breadcrumb-links .divider {
+        color: var(--accent);
+    }

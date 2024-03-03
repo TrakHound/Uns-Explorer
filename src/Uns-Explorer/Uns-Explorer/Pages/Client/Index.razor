@@ -1,0 +1,60 @@
+﻿@page "/client/{connectionId}"
+@rendermode InteractiveServer
+@inject ClientService clientService
+
+<div class="client-page">
+    <div class="client-toolbar">
+        <Header />
+    </div>
+    <div class="client-content">
+        <RadzenSplitter Orientation="Orientation.Horizontal">
+            <RadzenSplitterPane Size="70%">
+                <div class="client-tree">
+                    <UnsTreeView />
+                </div>
+            </RadzenSplitterPane>
+            <RadzenSplitterPane Size="30%">
+                <div class="client-sidebar">
+                    <Information />
+                    <Value />
+                    <Publish />
+                </div>
+            </RadzenSplitterPane>
+        </RadzenSplitter>
+    </div>
+    <div class="client-footer">
+        <Footer />
+    </div>
+</div>
+
+@code {
+
+    private string previousConnectionId;
+
+
+    [Parameter]
+    public string ConnectionId { get; set; }
+
+
+    protected async override Task OnInitializedAsync()
+    {
+        await Load();
+    }
+
+    protected async override Task OnParametersSetAsync()
+    {
+        await Load();
+    }
+
+
+    private async Task Load()
+    {
+        if (ConnectionId != null && ConnectionId != previousConnectionId)
+        {
+            previousConnectionId = ConnectionId;
+
+            await clientService.Load(ConnectionId);
+        }
+    }
+
+}

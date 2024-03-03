@@ -1,0 +1,33 @@
+﻿.footer-panel {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    background: #00b33c;
+    background: linear-gradient(180deg, #00994d 0%, #008040 100%);
+    border-top: 1px solid #000;
+    height: 24px;
+}
+
+.connection-panel {
+    grid-column: 1;
+    padding: 0 20px;
+}
+
+.connection-icon {
+    font-size: 12px;
+    line-height: 12px;
+    color: white;
+}
+
+.connection-status {
+    font-size: 12px;
+    line-height: 12px;
+    color: white;
+    padding-left: 10px;
+}
+
+.connection-server {
+    font-size: 12px;
+    line-height: 12px;
+    color: white;
+    padding-left: 40px;
+}

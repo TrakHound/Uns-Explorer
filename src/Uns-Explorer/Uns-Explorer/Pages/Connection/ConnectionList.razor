@@ -1,0 +1,38 @@
+﻿@rendermode InteractiveServer
+@inject ConnectionService connectionService
+@inject ConnectionListService connectionListService
+
+<div class="connection-list">
+
+    @{
+        var connections = connectionService.GetConnections();
+        if (!connections.IsNullOrEmpty())
+        {
+            foreach (var connection in connections)
+            {
+                var type = connection.Type?.ToUpper();
+                var active = connection.Id == connectionListService.SelectedConnectionId ? "active" : "";
+
+                <div class="connection-list-item @active" @onclick="() => ConnectionSelected(connection.Id)">
+                    <div class="connection-list-item-header">
+                        <span class="connection-type">@type</span>
+                    </div>
+                    <div class="connection-list-item-information">
+                        <span class="connection-title">@connection.Display</span>
+                    </div>
+                </div>
+            }
+        }
+    }
+
+</div>
+
+@code {
+
+    private async void ConnectionSelected(string connectionId)
+    {
+        connectionListService.SelectConnection(connectionId);
+        await InvokeAsync(StateHasChanged);
+    }
+
+}

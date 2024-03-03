@@ -1,0 +1,29 @@
+﻿@rendermode InteractiveServer
+@inject ConnectionService connectionService
+@inject ConnectionListService connectionListService
+
+<div class="connection-settings">
+
+    @if (connectionListService.SelectedConnectionId != null)
+    {
+        var connection = connectionService.GetConnection(connectionListService.SelectedConnectionId);
+        if (connection != null)
+        {
+            <h1>@connection.Id</h1>
+        }
+    }
+
+</div>
+
+@code {
+
+    protected override void OnInitialized()
+    {
+        connectionListService.ConnectionSelected += ConnectionSelected;
+    }
+
+    private async void ConnectionSelected(object sender, string connectionId)
+    {
+        await InvokeAsync(StateHasChanged);
+    }
+}

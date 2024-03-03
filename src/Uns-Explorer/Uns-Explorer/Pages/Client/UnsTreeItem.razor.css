@@ -1,0 +1,17 @@
+﻿.uns-tree-item-content {
+    display: grid;
+    grid-template-columns: max-content max-content 1fr max-content;
+    font-size: 14px;
+}
+
+.uns-tree-item-content .path {
+
+}
+
+    .uns-tree-item-content .symbol {
+
+    }
+
+    .uns-tree-item-content .value {
+        white-space: nowrap;
+    }

@@ -1,0 +1,127 @@
+﻿.uns-tree-view {
+    height: 100%;
+    overflow: auto;
+    background: #f4f4f4;
+    padding: 10px;
+    border-right: 1px solid #ddd;
+}
+
+    .uns-tree-view ::deep .rz-tree {
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .uns-tree-view ::deep .rz-treenode {
+        padding-left: 20px;
+        background: none;
+    }
+
+    .uns-tree-view ::deep .rz-tree > .rz-tree-container > .rz-treenode {
+        padding: 0;
+        margin: 0;
+    }
+
+    .uns-tree-view ::deep .rz-treenode-content {
+        padding: 0;
+        margin: 0;
+        background: none;
+    }
+
+    .uns-tree-view ::deep .rz-treenode-content-selected {
+        background: none;
+    }
+
+    .uns-tree-view ::deep .rz-treenode-content .rz-tree-toggler {
+        padding: 0 !important;
+        margin: 0 !important;
+        font-size: 18px;
+        line-height: 20px;
+        padding-left: 2px !important;
+        padding-right: 5px !important;
+        height: auto;
+        width: auto;
+        border-radius: 4px 0 0 4px;
+    }
+
+    .uns-tree-view ::deep .rz-treenode-content:hover .rz-tree-toggler {
+        background: var(--accent);
+        color: white;
+    }
+
+    .uns-tree-view ::deep .rz-treenode-content-selected .rz-tree-toggler {
+        background: var(--accentDark) !important;
+        color: white;
+    }
+
+    .uns-tree-view ::deep .rz-treenode.no-children .rz-tree-toggler {
+        display: none;
+    }
+
+    .uns-tree-view ::deep .rz-treenode-content .rz-treenode-label {
+        padding: 0;
+        margin: 0;
+        background: none;
+    }
+
+    .uns-tree-view ::deep .rz-treenode-content .uns-tree-item-content {
+        line-height: 20px;
+        padding-right: 5px;
+        border-radius: 0 4px 4px 0;
+    }
+
+    .uns-tree-view ::deep .rz-treenode.no-children .uns-tree-item-content {
+        margin-left: 20px;
+        padding-left: 5px;
+        border-radius: 4px;
+    }
+
+    .uns-tree-view ::deep .rz-treenode-content:hover .uns-tree-item-content {
+        background: var(--accentLight);
+        color: white;
+    }
+
+    .uns-tree-view ::deep .rz-treenode.recent > .rz-treenode-content > .rz-treenode-label .uns-tree-item-content {
+        background: var(--accentVeryLight);
+        animation-name: example;
+        animation-delay: 0.25s;
+        animation-duration: 1.25s;
+        animation-direction: normal;
+        animation-fill-mode: forwards;
+    }
+
+    .uns-tree-view ::deep .rz-treenode-content-selected .uns-tree-item-content {
+        background: var(--accentDark) !important;
+        color: white;
+    }
+
+    .uns-tree-view ::deep .rz-treenode-content .uns-tree-item-content .path {
+        font-weight: 500;
+        font-size: 14px;
+    }
+
+    .uns-tree-view ::deep .rz-treenode-content .uns-tree-item-content .count {
+        font-size: 12px;
+        padding-left: 5px;
+        color: #888;
+    }
+
+    .uns-tree-view ::deep .rz-treenode-content .uns-tree-item-content .symbol {
+        font-size: 14px;
+        padding-left: 5px;
+    }
+
+    .uns-tree-view ::deep .rz-treenode-content .uns-tree-item-content .value {
+        font-size: 14px;
+        padding-left: 5px;
+    }
+
+
+@keyframes example {
+    0% {
+        background-color: var(--accentVeryLight);
+    }
+
+    100% {
+        background-color: transparent;
+    }
+}
