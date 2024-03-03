@@ -19,6 +19,7 @@ Client application to subscribe and publish to a Unified Namespace. Supports MQT
 - Finish Client page (Copy, Delete, and some of the other buttons aren't wired up yet)
 - Finish Connection Configuration page
     - Add template configurations (ex. HiveMQ, etc.)
+- Benchmark and optimize for performance. Should be close or better to MQTT Explorer app performance
 - Add History functionality
 - Add Publish capability for Sparkplug B
 - Add Logging
