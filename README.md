@@ -6,6 +6,7 @@ Client application to subscribe and publish to a Unified Namespace. Supports MQT
 - Supports Sparkplug B decoding/encoding
 - Work with Sparkplug B using Paths (instead of GroupId, NodeId, DeviceId)
 - Built on .NET 8 using Blazor
+- Uses the [UNS.NET](https://github.com/TrakHound/Uns.NET) libraries
 
 
 ![Screenshot](img/mqtt-screenshot-01.png)
